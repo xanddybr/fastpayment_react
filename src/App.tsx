@@ -3,8 +3,10 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 
+
 import './App.css'
-import Buttons from './components/Buttons'
+
+import { Buttons, Bluisky } from './components/Buttons'
 
 function Leiamais(){
   return(
@@ -17,11 +19,10 @@ function Leiamais(){
 
 function Contador(){
   const [count, setCount] = useState(0)
-  const aumentar = () => setCount((count) => count + 1)
+
+  const aumentar = () => count < 10 && setCount((count) => count + 1);
   
-  const diminuir = () => {if(count > 0){
-      setCount((count) => count - 1)
-    }} 
+  const diminuir = () => count > 0 && setCount((count) => count - 1);
     
   return(
     <>
@@ -31,7 +32,7 @@ function Contador(){
           onClick={aumentar}
         >Aumentar       
     </button>
-  Count is {count}
+  <div className="container">Count is {count}</div>
     <button 
           type="button"
           className=""
@@ -41,6 +42,7 @@ function Contador(){
     </>      
   )
 }
+
 
 function App() {
   
@@ -128,18 +130,7 @@ function App() {
                 X.com
               </a>
             </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
+            <Bluisky />
           </ul>
         </div>
       </section>
