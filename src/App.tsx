@@ -2,10 +2,48 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
+
 import './App.css'
+import Buttons from './components/Buttons'
+
+function Leiamais(){
+  return(
+    <a href="https://react.dev/" target="_blank">
+                <img className="button-icon" src={reactLogo} alt="" />
+                Learn more
+    </a>
+  )
+}
+
+function Contador(){
+  const [count, setCount] = useState(0)
+  const aumentar = () => setCount((count) => count + 1)
+  
+  const diminuir = () => {if(count > 0){
+      setCount((count) => count - 1)
+    }} 
+    
+  return(
+    <>
+     <button 
+          type="button"
+          className=""
+          onClick={aumentar}
+        >Aumentar       
+    </button>
+  Count is {count}
+    <button 
+          type="button"
+          className=""
+          onClick={diminuir}
+        >Diminuir
+    </button>
+    </>      
+  )
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
@@ -21,13 +59,8 @@ function App() {
             Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+        
+       <Contador />
       </section>
 
       <div className="ticks"></div>
@@ -47,10 +80,8 @@ function App() {
               </a>
             </li>
             <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
+              <Leiamais />
+              <Buttons />
             </li>
           </ul>
         </div>
