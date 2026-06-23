@@ -1,0 +1,291 @@
+.pix-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 0 16px;
+  text-align: left;
+}
+
+/* ── Header ─────────────────────────────────── */
+.pix-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.pix-header-emoji {
+  font-size: 2.4rem;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.pix-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-h);
+  margin: 0 0 4px;
+  letter-spacing: -0.3px;
+}
+
+.pix-header p {
+  font-size: 0.85rem;
+  color: var(--text);
+}
+
+/* ── Card ────────────────────────────────────── */
+.pix-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+}
+
+/* ── Fieldset ────────────────────────────────── */
+.pix-fieldset {
+  border: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.pix-legend {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+/* ── Fields ──────────────────────────────────── */
+.pix-field {
+  margin-bottom: 14px;
+}
+
+.pix-field:last-child {
+  margin-bottom: 0;
+}
+
+.pix-row {
+  display: flex;
+  gap: 12px;
+}
+
+.pix-row .pix-field {
+  flex: 1;
+}
+
+.pix-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 5px;
+}
+
+.pix-label-hint {
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.pix-input {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--text-h);
+  background: var(--bg);
+  font-family: var(--sans);
+  box-sizing: border-box;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.pix-input::placeholder {
+  color: var(--text);
+  opacity: 0.55;
+}
+
+.pix-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+/* ── Divider ─────────────────────────────────── */
+.pix-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+/* ── Error ───────────────────────────────────── */
+.pix-error {
+  font-size: 0.82rem;
+  color: #e53e3e;
+  background: rgba(229, 62, 62, 0.08);
+  border-radius: 8px;
+  padding: 9px 13px;
+  margin-bottom: 16px;
+}
+
+/* ── Submit button ───────────────────────────── */
+.pix-btn-submit {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 12px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: opacity 0.18s, transform 0.12s;
+}
+
+.pix-btn-submit:hover {
+  opacity: 0.88;
+}
+
+.pix-btn-submit:active {
+  transform: scale(0.97);
+}
+
+/* ── Result ──────────────────────────────────── */
+.pix-result {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.pix-result-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pix-result-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text);
+  opacity: 0.7;
+}
+
+.pix-result-amount {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+}
+
+.pix-result-desc {
+  font-size: 0.88rem;
+  color: var(--text);
+}
+
+/* ── PIX code block ──────────────────────────── */
+.pix-code-block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pix-code {
+  display: block;
+  background: var(--code-bg);
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.68rem;
+  font-family: var(--mono);
+  color: var(--text-h);
+  word-break: break-all;
+  line-height: 1.55;
+  max-height: 90px;
+  overflow-y: auto;
+  user-select: all;
+}
+
+/* ── Action buttons ──────────────────────────── */
+.pix-result-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pix-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 11px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: opacity 0.18s, transform 0.12s;
+}
+
+.pix-btn:active {
+  transform: scale(0.97);
+}
+
+.pix-btn-copy {
+  background: var(--accent-bg);
+  border: 1.5px solid var(--accent-border);
+  color: var(--accent);
+}
+
+.pix-btn-copy:hover {
+  opacity: 0.8;
+}
+
+.pix-btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(37, 211, 102, 0.3);
+}
+
+.pix-btn-whatsapp:hover {
+  opacity: 0.88;
+}
+
+.pix-btn-reset {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-family: var(--sans);
+  cursor: pointer;
+  text-align: center;
+  padding: 4px;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.pix-btn-reset:hover {
+  opacity: 1;
+}
+
+/* ── Responsive ──────────────────────────────── */
+@media (max-width: 1024px) {
+  .pix-card {
+    padding: 22px 18px;
+  }
+
+  .pix-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pix-row .pix-field {
+    margin-bottom: 14px;
+  }
+}
