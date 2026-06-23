@@ -3,6 +3,7 @@ import { formatarMoeda } from '../../utils/pixGenerator'
 
 interface PixResultProps {
   pixCode: string
+  nomeCliente: string
   telefone: string
   descricao: string
   quantidade: number
@@ -10,52 +11,69 @@ interface PixResultProps {
   onReset: () => void
 }
 
-function PixResult({ pixCode, telefone, descricao, quantidade, valorTotal, onReset }: PixResultProps) {
-  const [copied, setCopied] = useState(false)
+function PixResult({ pixCode, nomeCliente, telefone, descricao, quantidade, valorTotal, onReset }: PixResultProps) {
+  const [copiedMsg, setCopiedMsg] = useState(false)
+  const [copiedPix, setCopiedPix] = useState(false)
 
-  function copiarPix() {
+  const primeiroNome = nomeCliente.trim().split(' ')[0]
+
+  const textMensagem =
+    `Olá, *${primeiroNome}*! 😊\n\n` +
+    `Tudo certo com o seu pedido nas *Delicias do Guguinha*! 🍽️\n\n` +
+    `📦 *Item:* ${descricao}\n` +
+    `🔢 *Quantidade:* ${quantidade}x\n` +
+    `💰 *Total:* ${formatarMoeda(valorTotal)}\n\n` +
+    `Para finalizar, efetue o pagamento via PIX usando a chave Copia e Cola que enviarei a seguir.\n\n` +
+    `Qualquer dúvida é só chamar. Obrigado pela preferência! 🙏`
+
+  function copiarMensagem() {
+    navigator.clipboard.writeText(textMensagem).then(() => {
+      setCopiedMsg(true)
+      setTimeout(() => setCopiedMsg(false), 2500)
+    })
+  }
+
+  function copiarChave() {
     navigator.clipboard.writeText(pixCode).then(() => {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2500)
+      setCopiedPix(true)
+      setTimeout(() => setCopiedPix(false), 2500)
     })
   }
 
   function enviarWhatsApp() {
     const numero = '55' + telefone.replace(/\D/g, '')
-    const mensagem =
-      `Olá! 🍽️ Segue o PIX do seu pedido nas *Delicias do Guguinha*:\n\n` +
-      `📦 *Pedido:* ${descricao}\n` +
-      `🔢 *Qtd:* ${quantidade}x\n` +
-      `💰 *Total:* ${formatarMoeda(valorTotal)}\n\n` +
-      `👇 *Chave PIX (Copia e Cola):*\n${pixCode}\n\n` +
-      `Obrigado pela preferência! 😊`
-
-    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`, '_blank')
+    const mensagemCompleta = textMensagem + `\n\n*Chave PIX (Copia e Cola):*\n${pixCode}`
+    window.open(`https://wa.me/${numero}?text=${encodeURIComponent(mensagemCompleta)}`, '_blank')
   }
 
   return (
     <div className="pix-result">
       <div className="pix-result-summary">
-        <span className="pix-result-label">Total do pedido</span>
+        <span className="pix-result-label">Total do pedido — {nomeCliente}</span>
         <span className="pix-result-amount">{formatarMoeda(valorTotal)}</span>
         <span className="pix-result-desc">{quantidade}x {descricao}</span>
       </div>
 
       <div className="pix-code-block">
-        <span className="pix-result-label">Chave PIX — Copia e Cola</span>
+        <span className="pix-result-label">1. Mensagem</span>
+        <code className="pix-code pix-code-message">{textMensagem}</code>
+        <button type="button" className="pix-btn pix-btn-copy" onClick={copiarMensagem}>
+          {copiedMsg ? '✅ Copiado!' : '📋 Copiar mensagem'}
+        </button>
+      </div>
+
+      <div className="pix-code-block">
+        <span className="pix-result-label">2. Chave PIX — Copia e Cola</span>
         <code className="pix-code">{pixCode}</code>
-      </div>
-
-      <div className="pix-result-actions">
-        <button type="button" className="pix-btn pix-btn-copy" onClick={copiarPix}>
-          {copied ? '✅ Copiado!' : '📋 Copiar chave PIX'}
-        </button>
-
-        <button type="button" className="pix-btn pix-btn-whatsapp" onClick={enviarWhatsApp}>
-          <WhatsAppIcon />
-          Enviar para WhatsApp
+        <button type="button" className="pix-btn pix-btn-copy" onClick={copiarChave}>
+          {copiedPix ? '✅ Copiado!' : '📋 Copiar chave PIX'}
         </button>
       </div>
+
+      <button type="button" className="pix-btn pix-btn-whatsapp" onClick={enviarWhatsApp}>
+        <WhatsAppIcon />
+        Enviar tudo pelo WhatsApp
+      </button>
 
       <button type="button" className="pix-btn-reset" onClick={onReset}>
         ← Novo pedido

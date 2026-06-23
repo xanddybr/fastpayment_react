@@ -7,6 +7,7 @@ import { PIX_CONFIG } from '../../config/pixConfig'
 import './PixForm.css'
 
 interface FormState {
+  nomeCliente: string
   descricao: string
   quantidade: string
   valorUnitario: string
@@ -15,6 +16,7 @@ interface FormState {
 
 interface ResultState {
   pixCode: string
+  nomeCliente: string
   telefone: string
   descricao: string
   quantidade: number
@@ -22,6 +24,7 @@ interface ResultState {
 }
 
 const EMPTY_FORM: FormState = {
+  nomeCliente: '',
   descricao: '',
   quantidade: '',
   valorUnitario: '',
@@ -53,6 +56,7 @@ function PixForm() {
     const valor = parseFloat(form.valorUnitario)
     const tel   = form.telefone.replace(/\D/g, '')
 
+    if (!form.nomeCliente.trim()) return setError('Informe o nome do cliente.')
     if (!form.descricao.trim()) return setError('Informe a descrição do item.')
     if (!qtd || qtd < 1)        return setError('Quantidade deve ser ao menos 1.')
     if (!valor || valor <= 0)   return setError('Informe um valor válido.')
@@ -65,6 +69,7 @@ function PixForm() {
 
     setResult({
       pixCode,
+      nomeCliente: form.nomeCliente.trim(),
       telefone: form.telefone,
       descricao: form.descricao.trim(),
       quantidade: qtd,
@@ -91,6 +96,20 @@ function PixForm() {
           <PixResult {...result} onReset={handleReset} />
         ) : (
           <form onSubmit={handleSubmit} noValidate>
+            <div className="pix-field">
+              <label className="pix-label" htmlFor="nomeCliente">Nome do cliente</label>
+              <input
+                id="nomeCliente"
+                className="pix-input"
+                type="text"
+                placeholder="Ex: Maria Silva"
+                value={form.nomeCliente}
+                onChange={e => { setForm(prev => ({ ...prev, nomeCliente: e.target.value })); setError('') }}
+              />
+            </div>
+
+            <hr className="pix-divider" />
+
             <ItemField
               descricao={form.descricao}
               quantidade={form.quantidade}

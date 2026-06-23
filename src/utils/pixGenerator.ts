@@ -17,7 +17,7 @@ function tlv(id: string, value: string): string {
 function sanitize(str: string, maxLen: number): string {
   return str
     .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')   // remove acentos
+    .replace(/[̀-ͯ]/g, '') // remove acentos (unicode escape seguro)
     .toUpperCase()
     .replace(/[^A-Z0-9 ]/g, '')
     .trim()
@@ -40,7 +40,7 @@ export function gerarPixEMV(
 
   let payload =
     tlv('00', '01') +
-    tlv('01', '12') +
+    tlv('01', '11') +   // 11 = PIX estático (chave fixa, reutilizável)
     merchant +
     tlv('52', '0000') +
     tlv('53', '986') +
